@@ -9,11 +9,11 @@ const BATCH_SIZE = 20
 
 const DEFAULT_CATEGORIES = [
   {
-    name: 'AI & Machine Learning',
+    name: 'AI & Agents',
     slug: 'ai-resources',
     color: '#8b5cf6',
     description:
-      'Artificial intelligence, machine learning, LLMs, ChatGPT, Claude, Gemini, Grok, Midjourney, Sora, AI agents, RAG, fine-tuning, prompts, vector databases, model benchmarks, AI startups, AI safety, multimodal models',
+      'AI models, LLMs, Claude, Gemini, AI agents, agentic workflows, MCP, RAG, prompt engineering, fine-tuning, AI tooling, automation via AI, multimodal, AI startups, AI safety, model benchmarks — anything where AI is the primary subject',
     isAiGenerated: false,
   },
   {
@@ -21,55 +21,15 @@ const DEFAULT_CATEGORIES = [
     slug: 'finance-crypto',
     color: '#f59e0b',
     description:
-      'Cryptocurrency, Bitcoin, Ethereum, Solana, DeFi protocols, NFTs, on-chain activity, crypto trading, altcoins, airdrops, memecoin, Web3 development, smart contracts, DAOs, Layer 2, Uniswap, pump.fun, wallets, blockchain analytics',
+      'Bitcoin, Ethereum, Solana, DeFi, NFTs, on-chain analytics, crypto trading, altcoins, airdrops, memecoins, Web3 development, smart contracts, DAOs, Layer 2, wallets, tokenomics, blockchain infrastructure',
     isAiGenerated: false,
   },
   {
-    name: 'Dev Tools & Engineering',
+    name: 'Dev & Engineering',
     slug: 'dev-tools',
     color: '#06b6d4',
     description:
-      'Software engineering, coding, GitHub, open source, frameworks, APIs, databases, DevOps, CI/CD, terminal tools, debugging, system design, backend, frontend, mobile dev, Rust, Go, TypeScript, Python, Vercel, Supabase, Docker',
-    isAiGenerated: false,
-  },
-  {
-    name: 'Finance & Investing',
-    slug: 'finance-investing',
-    color: '#10b981',
-    description:
-      'Stock market, equities, options trading, macroeconomics, Federal Reserve, interest rates, hedge funds, venture capital, private equity, earnings reports, portfolio management, real estate investing, commodities, forex, financial charts — NOT crypto',
-    isAiGenerated: false,
-  },
-  {
-    name: 'Startups & Business',
-    slug: 'startups-business',
-    color: '#f97316',
-    description:
-      'Startups, founders, entrepreneurship, SaaS, product-market fit, fundraising, VC, angel investing, growth hacking, B2B, marketing, sales, revenue, bootstrapping, Y Combinator, acquisition, company building, business strategy',
-    isAiGenerated: false,
-  },
-  {
-    name: 'News & Politics',
-    slug: 'news',
-    color: '#6366f1',
-    description:
-      'Breaking news, current events, US politics, global politics, geopolitics, government policy, elections, regulation, tech policy, AI regulation, crypto regulation, war and conflict, international relations, journalism, investigative reporting',
-    isAiGenerated: false,
-  },
-  {
-    name: 'Design & Product',
-    slug: 'design',
-    color: '#ec4899',
-    description:
-      'UI/UX design, product design, visual design, Figma, typography, design systems, motion design, brand identity, user research, product strategy, wireframes, creative tools, color theory, web design, app design',
-    isAiGenerated: false,
-  },
-  {
-    name: 'Health & Wellness',
-    slug: 'health-wellness',
-    color: '#14b8a6',
-    description:
-      'Fitness, nutrition, longevity, biohacking, sleep, mental health, supplements, workout routines, diet, weight loss, strength training, cognitive performance, stress management, meditation, gut health, lab results, wearables like Whoop and Oura',
+      'Software engineering, coding, GitHub, open source, APIs, databases, DevOps, system design, backend, frontend, TypeScript, Python, Rust, Go, Vercel, Supabase, Docker, CLI tools, developer workflows, debugging, architecture patterns',
     isAiGenerated: false,
   },
   {
@@ -77,38 +37,54 @@ const DEFAULT_CATEGORIES = [
     slug: 'security-privacy',
     color: '#ef4444',
     description:
-      'Cybersecurity, hacking, exploits, vulnerabilities, OPSEC, privacy tools, VPNs, encryption, threat intelligence, social engineering, phishing, malware, zero-days, pen testing, CTF, data breaches, authentication, identity security',
+      'Cybersecurity, hacking, exploits, OPSEC, privacy tools, VPNs, encryption, threat intelligence, phishing, malware, zero-days, pen testing, CTF, data breaches, authentication, identity, browser privacy, surveillance',
     isAiGenerated: false,
   },
   {
-    name: 'Science & Research',
-    slug: 'science-research',
-    color: '#3b82f6',
+    name: 'Business & Growth',
+    slug: 'startups-business',
+    color: '#f97316',
     description:
-      'Scientific research, papers, discoveries, physics, biology, neuroscience, space exploration, climate, chemistry, medical breakthroughs, academic studies, emerging technology, robotics, quantum computing, energy, materials science',
+      'Startups, founders, SaaS, product-market fit, fundraising, VC, marketing, growth, sales, revenue, bootstrapping, SEO, audience building, personal brand, content strategy, distribution, X/Twitter growth tactics',
     isAiGenerated: false,
   },
   {
-    name: 'Productivity',
+    name: 'PKM & Workflows',
     slug: 'productivity',
     color: '#a855f7',
     description:
-      'Productivity systems, time management, habits, focus techniques, note-taking, second brain, deep work, mental models, PKM tools like Obsidian and Notion, life optimization, workflows, automation, delegation',
+      'Personal knowledge management, Obsidian, second brain, note-taking systems, automation, workflows, mental models, deep work, focus, habit systems, tools for thought, life operating systems, delegation, time design',
     isAiGenerated: false,
   },
   {
-    name: 'Funny & Memes',
-    slug: 'funny-memes',
-    color: '#eab308',
+    name: 'Health & Performance',
+    slug: 'health-wellness',
+    color: '#14b8a6',
     description:
-      'Memes, jokes, satire, humor, viral content, relatable posts, shitposts, funny screenshots, comedy threads, parody, ironic takes — content whose primary purpose is to be funny or entertaining',
+      'Fitness, nutrition, longevity, biohacking, sleep optimisation, cognitive performance, supplements, strength training, stress, meditation, gut health, lab results, wearables like Whoop and Oura, mental clarity',
+    isAiGenerated: false,
+  },
+  {
+    name: 'Science & Ideas',
+    slug: 'science-research',
+    color: '#3b82f6',
+    description:
+      'Scientific research, papers, physics, biology, neuroscience, space, quantum computing, emerging tech, robotics, futurism, philosophy, big ideas, intellectual frameworks, contrarian thinking, long-form essays',
+    isAiGenerated: false,
+  },
+  {
+    name: 'Macro & Finance',
+    slug: 'macro-finance',
+    color: '#10b981',
+    description:
+      'Macroeconomics, Federal Reserve, interest rates, inflation, global markets, equities, commodities, forex, bonds, geopolitical risk, monetary policy, fiscal policy, central banks, market cycles, recession signals, economic data — NOT crypto',
     isAiGenerated: false,
   },
   {
     name: 'General',
     slug: 'general',
     color: '#64748b',
-    description: "Miscellaneous content that doesn't clearly fit any other category — use sparingly, only when no other category applies",
+    description: "Miscellaneous content — memes, jokes, satire, entertainment, or anything that doesn't clearly fit another category",
     isAiGenerated: false,
   },
 ] as const

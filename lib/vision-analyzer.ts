@@ -55,17 +55,17 @@ const ANALYSIS_PROMPT = `Analyze this image for a bookmark search system. Return
   "mood": "emotional tone: humorous/educational/alarming/inspiring/satirical/celebratory/neutral",
   "style": "photo/screenshot/meme/chart/infographic/artwork/gif/code/diagram",
   "meme_template": "specific meme template name if applicable, else null",
-  "tags": ["30-40 specific searchable tags — topics, synonyms, proper nouns, brands, actions, emotions"]
+  "tags": ["5-8 broad, reusable topic tags — pick terms that will recur across many bookmarks"]
 }
 
 Rules:
 - text_ocr: transcribe ALL readable text exactly, word for word
 - If a financial chart: include asset name, direction (up/down), timeframe
-- If code: include language, key function/concept names
+- If code: include language, key function/concept name
 - If a meme: include the exact template name
-- tags: be maximally specific — include brand names, person names, tool names, technical terms
-- BAD tags: "twitter", "post", "image", "screenshot" (too generic)
-- GOOD tags: "bitcoin price chart", "react hooks", "frustrated man", "gpt-4", "bull market"`
+- tags: choose broad, shared terms over ultra-specific one-offs — tags should cluster notes together
+- BAD tags: "automated-prompt-building", "synthetic-prompt-creation" (too niche, never reused)
+- GOOD tags: "prompt-engineering", "llm", "automation", "bitcoin", "react" (recur across many notes)`
 
 const RETRY_DELAYS_MS = [1500, 4000, 10000]
 const CONCURRENCY = 12
@@ -353,16 +353,17 @@ function buildEnrichmentPrompt(bookmarks: BookmarkForEnrichment[]): string {
   return `Generate search tags and metadata for each of these Twitter/X bookmarks.
 
 For each bookmark return:
-- tags: 25-35 specific semantic search tags covering entities, actions, visual content, synonyms, and emotional signals
+- tags: 5-8 broad, reusable topic tags — terms that will recur across many bookmarks and form useful clusters
 - sentiment: one of "positive", "negative", "neutral", "humorous", "controversial"
 - people: named people mentioned or shown (max 5, empty array if none)
-- companies: company/product/tool names explicitly referenced (max 8, empty array if none)
+- companies: company/product/tool names explicitly referenced (max 5, empty array if none)
 
 Rules for tags:
-- 2-5 words max, specific beats generic
-- NO generic terms: "twitter post", "screenshot", "social media", "content"
-- YES to proper nouns, version numbers, specific concepts
-- Rank most-search-relevant tags first
+- Prefer broad shared terms over ultra-specific one-offs — ask "will this tag appear on 10+ other bookmarks?"
+- 1-3 words, lowercase, hyphenated
+- NO: "twitter post", "screenshot", "social media", "content", or synonyms of other tags you already listed
+- YES: "prompt-engineering", "llm", "automation", "bitcoin", "defi", "react", "opsec"
+- Rank by importance, not specificity
 
 Return ONLY valid JSON, no markdown:
 [{"id":"...","tags":[...],"sentiment":"...","people":[...],"companies":[...]}]
